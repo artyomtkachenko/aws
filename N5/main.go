@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"sort"
 	"time"
 )
 
@@ -17,7 +18,7 @@ func (p byPoints) Len() int {
 }
 
 func (p byPoints) Swap(i, j int) {
-	p[i].d, p[j].d = p[j].d, p[i].d
+	p[i], p[j] = p[j], p[i]
 }
 
 func (p byPoints) Less(i, j int) bool {
@@ -50,8 +51,6 @@ func generate(queue chan points) {
 	for {
 		select {
 		case <-quit:
-			// time.Sleep(9000 * time.Millisecond) // Gi
-			fmt.Println("Got QUIT")
 			close(queue)
 			return
 		default:
@@ -70,17 +69,14 @@ func reduce(queue chan points, k int) {
 		if len(arr) < k {
 			arr = append(arr, p)
 		} else {
-			// fmt.Printf("Before sort Got: %+v\n", arr)
-			// sort.Sort(arr)
-			// fmt.Printf("After sirt Got: %+v\n", arr)
+			sort.Sort(arr)
 			last := arr[k-1]
 			if p.d <= last.d {
 				arr = append(arr[:k-1], p) // Replacing the max one
 			}
 		}
 	}
-	fmt.Printf("Got: %+v\n", arr)
-	// fmt.Println(arr)
+	fmt.Printf("Result: %+v\n", arr)
 }
 
 func main() {
