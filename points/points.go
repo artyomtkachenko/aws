@@ -1,4 +1,4 @@
-package points
+package Points
 
 import (
 	"fmt"
@@ -7,9 +7,9 @@ import (
 	"time"
 )
 
-type byPoints []points
+type byPoints []Points
 
-type points struct {
+type Points struct {
 	x, y, d int
 }
 
@@ -25,9 +25,9 @@ func (p byPoints) Less(i, j int) bool {
 	return p[i].d < p[j].d
 }
 
-func genRand() points {
+func genRand() Points {
 	n := 100
-	p := new(points)
+	p := new(Points)
 	p.x = rand.Intn(n)
 	p.y = rand.Intn(n)
 	p.d = p.x*p.x + p.y*p.y
@@ -37,7 +37,7 @@ func genRand() points {
 	return *p
 }
 
-func Generate(queue chan points) {
+func Generate(queue chan Points) {
 	quit := make(chan bool)
 	timer := time.NewTimer(time.Millisecond * 20)
 	go func() {
@@ -56,7 +56,7 @@ func Generate(queue chan points) {
 	}
 }
 
-func Reduce(queue chan points, k int) {
+func Reduce(queue chan Points, k int) {
 	var arr byPoints
 
 	for p := range queue {
