@@ -7,6 +7,6 @@ func main() {
 	sum := 15
 	res := subsum.GetResult(data, sum)
 	for _, el := range res {
-		n6.PrintResult(el, sum)
+		subsum.PrintResult(el, sum)
 	}
 }
