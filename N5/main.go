@@ -64,7 +64,6 @@ func reduce(queue chan points, k int) {
 	var arr byPoints
 
 	for p := range queue {
-
 		// fmt.Printf("Got: %+v\n", p)
 		if len(arr) < k {
 			arr = append(arr, p)
