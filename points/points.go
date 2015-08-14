@@ -10,7 +10,7 @@ import (
 type byPoints []Points
 
 type Points struct {
-	x, y, d int
+	X, Y, D int
 }
 
 func (p byPoints) Len() int {
@@ -22,16 +22,16 @@ func (p byPoints) Swap(i, j int) {
 }
 
 func (p byPoints) Less(i, j int) bool {
-	return p[i].d < p[j].d
+	return p[i].D < p[j].D
 }
 
 func genRand() Points {
 	n := 100
 	p := new(Points)
-	p.x = rand.Intn(n)
-	p.y = rand.Intn(n)
-	p.d = p.x*p.x + p.y*p.y
-	if p.x == 0 || p.y == 0 {
+	p.X = rand.Intn(n)
+	p.Y = rand.Intn(n)
+	p.D = p.X*p.X + p.Y*p.Y
+	if p.X == 0 || p.Y == 0 {
 		*p = genRand()
 	}
 	return *p
@@ -66,7 +66,7 @@ func Reduce(queue chan Points, k int) byPoints {
 		} else {
 			sort.Sort(arr)
 			last := arr[k-1]
-			if p.d <= last.d {
+			if p.D <= last.D {
 				arr = append(arr[:k-1], p) // Replacing the max one
 			}
 		}
