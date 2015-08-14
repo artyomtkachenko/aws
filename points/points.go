@@ -56,7 +56,7 @@ func Generate(queue chan Points) {
 	}
 }
 
-func Reduce(queue chan Points, k int) {
+func Reduce(queue chan Points, k int) byPoints {
 	var arr byPoints
 
 	for p := range queue {
@@ -71,5 +71,5 @@ func Reduce(queue chan Points, k int) {
 			}
 		}
 	}
-	fmt.Printf("Result: %+v\n", arr)
+	return arr
 }

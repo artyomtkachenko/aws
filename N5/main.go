@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"time"
 
@@ -13,5 +14,7 @@ func main() {
 
 	k := 2
 	go points.Generate(queue)
-	points.Reduce(queue, k)
+
+	res := points.Reduce(queue, k)
+	fmt.Printf("Result: %+v\n", res)
 }
