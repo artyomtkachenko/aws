@@ -1,4 +1,4 @@
-package Points
+package points
 
 import (
 	"fmt"
