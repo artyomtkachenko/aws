@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+//PrintResult prins final result
 func PrintResult(res []int, sum int) {
 	var strs []string
 	for _, el := range res {
@@ -14,6 +15,7 @@ func PrintResult(res []int, sum int) {
 	fmt.Println(strings.Join(strs, " + "), " = ", sum)
 }
 
+// Recersivly search for all possible sums
 func sumIt(slice []int, res []int, i int, sum int, finalResult *[][]int) int {
 	if sum == 0 {
 
@@ -24,17 +26,18 @@ func sumIt(slice []int, res []int, i int, sum int, finalResult *[][]int) int {
 	if i == 0 {
 		return 0
 	}
-
-	if slice[i-1] <= sum {
+	last := slice[i-1]
+	if last <= sum {
 		sumIt(slice, res, i-1, sum, finalResult)
-		res = append(res, slice[i-1])
-		sumIt(slice, res, i-1, sum-slice[i-1], finalResult)
+		res = append(res, last)
+		sumIt(slice, res, i-1, sum-last, finalResult)
 	} else {
 		sumIt(slice, res, i-1, sum, finalResult)
 	}
 	return 0
 }
 
+//GetResult invokes the main recursive function
 func GetResult(data []int, sum int) [][]int {
 	var (
 		result [][]int // Final result
